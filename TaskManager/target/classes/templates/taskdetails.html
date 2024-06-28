@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+</head>
+<body>
+<h1>Task List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Task Name</th>
+        <th>Description</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <!-- Display book details -->
+        <td th:text="${task.taskId}">-</td>
+        <td>
+            <!-- Make book name clickable -->
+            <a th:href="@{/tasks/{id}(id=${task.taskId})}" class="book-link" th:text="${task.taskName}">-</a>
+        </td>
+        <td th:text="${task.taskDescription}">-</td>
+        <td th:text="${task.taskStatus}">-</td>
+        <!-- Delete and Edit buttons -->
+        <td>
+            <form th:action="@{/tasks/delete/{id}(id=${task.taskId})}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit">Delete</button>
+            </form>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
