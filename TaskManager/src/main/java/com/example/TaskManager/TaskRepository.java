@@ -28,11 +28,11 @@ public class TaskRepository {
     }
 
     public void addTask(Task newTask) {
-        String sql = "INSERT INTO tasks (taskName, taskDescription, tasktatus) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO tasks (task_id,taskName, taskDescription, tasktatus) VALUES (?,?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcClient.sql(sql)
-                .params(newTask.getTaskName(), newTask.getTaskDescription(), newTask.getTaskStatus())
+                .params(newTask.getTaskId(),newTask.getTaskName(), newTask.getTaskDescription(), newTask.getTaskStatus())
                 .update(keyHolder);
 
         Number key = keyHolder.getKey();
